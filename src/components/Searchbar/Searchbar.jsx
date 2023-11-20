@@ -1,5 +1,5 @@
 import css from './Searchbar.module.css';
-import searchIcon from '../Img/Search.png';
+import searchIcon from './Search.png';
 import { Formik, Form, Field } from 'formik';
 
 const Searchbar = ({ submit }) => {

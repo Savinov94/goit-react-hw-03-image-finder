@@ -17,16 +17,6 @@ class App extends Component {
     selectedImage: null,
   };
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      this.setState({ showModal: false });
-    }
-  };
-
   handleClick = () => {
     this.handlePictures();
   };
@@ -73,7 +63,7 @@ class App extends Component {
       <div className={css.App}>
         <Searchbar submit={this.handleSubmit} />
 
-        {pictures && (
+        {pictures && pictures.length > 0 && (
           <ImageGallery
             pictures={pictures}
             onLoadMore={this.handleClick}
@@ -82,9 +72,10 @@ class App extends Component {
         )}
         {error && <h1>{error}</h1>}
         <Loader isLoading={this.state.isLoading} />
-        {isShowPictures && (
+        {!this.state.isLoading && isShowPictures && (
           <Button onClick={this.handleClick} isVisible={isShowPictures} />
         )}
+
         {showModal && (
           <Modal selectedImage={selectedImage} onClose={this.toggleModal} />
         )}
