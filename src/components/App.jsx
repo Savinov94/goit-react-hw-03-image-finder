@@ -15,7 +15,14 @@ class App extends Component {
     query: '',
     showModal: false,
     selectedImage: null,
+    isShowPictures: false,
   };
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.query !== this.state.query) {
+      this.handlePictures();
+    }
+  }
 
   handleClick = () => {
     this.handlePictures();
@@ -52,7 +59,7 @@ class App extends Component {
   };
 
   handleSubmit = ({ query }) => {
-    this.setState({ query, pictures: [], page: 1 }, this.handlePictures);
+    this.setState({ query, pictures: [], page: 1, isShowPictures: true });
   };
 
   render() {
