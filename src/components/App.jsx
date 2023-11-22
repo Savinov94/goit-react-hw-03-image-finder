@@ -16,16 +16,20 @@ class App extends Component {
     showModal: false,
     selectedImage: null,
     isShowPictures: false,
+    page: 1,
   };
 
   componentDidUpdate(_, prevState) {
-    if (prevState.query !== this.state.query) {
+    if (
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
       this.handlePictures();
     }
   }
 
   handleClick = () => {
-    this.handlePictures();
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   handleImageClick = selectedImage => {
@@ -48,7 +52,6 @@ class App extends Component {
       this.setState(prevState => ({
         pictures: [...prevState.pictures, ...hits],
         error: '',
-        page: prevState.page + 1,
         isShowPictures: totalHits > prevState.pictures.length,
       }));
     } catch (error) {
